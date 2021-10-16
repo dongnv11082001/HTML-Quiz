@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16" />
+    <!-- <link href="https://fonts.googleapis.com/css?family=Pangolin:400,700|Proxima+Nova" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="style.css">
+    <title>HTML Quiz</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <h1>WPR</h1>
+            <div>
+                <ul class="yellow-circles">
+                    <li class="char">M</li>
+                    <li class="char">E</li>
+                    <li class="char">R</li>
+                    <li class="char">N</li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="slider">
+            <div class="text">
+                <h1>HTML Quiz</h1>
+            </div>
+        </div>
+
+        <div class="description">
+            <div class="page-title">
+                <p class="author">By Nguyen Van Dong</p>
+            </div>
+
+            <div class="description-test">
+                <h2>The Test</h2>
+                <p>The test contains 10 questions and there is no time limit.</p>
+                <p>The test is not official, it's just a nice way to see how much you know, or don't know about HTML.
+                </p>
+            </div>
+
+            <div class="description-test">
+                <h2>Count Your Score</h2>
+                <p>You will get 1 point for each correct answer. At the end of the Quiz, your total score will be
+                    displayed. Maximum score is 10 points.</p>
+            </div>
+
+            <div class="start-quiz">
+                <h1>Start the quiz</h1>
+                <p>Good luck!</p>
+                <button class="btn start-btn">Start the HTML quiz ❯</i></button>
+            </div>
+        </div>
+
+        <div id="quiz" class="quiz"></div>
+
+        <div class="submit">
+            <button class="btn submit-btn">Submit your answwer ❯</button>
+        </div>
+
+        <div class="review-quiz">
+            <div class="result">
+                <h1>Result:</h1>
+                <p id="score"></p>
+                <p id="percentage"></p>
+                <p id="scoreText"></p>
+                <button class="btn result-btn">Try again</button>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+
+</html>

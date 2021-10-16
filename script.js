@@ -1,8 +1,12 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 const url = 'https://wpr-quiz-api.herokuapp.com/attempts';
+const quiz = $('.quiz');
+const result = $('.result');
+const review = $('.review-quiz');
+const description = $('.description');
 let answers = {},
-	attemptsID = '';
+attemptsID = '';
 
 // Start Quiz
 const startQuiz = () => {
@@ -14,8 +18,6 @@ const startQuiz = () => {
 			renderQuiz(questionArray);
 		})
 		.catch((err) => console.log('Error: ' + err))
-	const quiz = $('.quiz');
-	const description = $('.description');
 
 	quiz.classList.add('active');
 	submitBtn.classList.add('active');
@@ -163,8 +165,6 @@ const handleCorrectAnswers = (correctAnswers) => {
 
 // Show quiz score
 const showScore = (score, numOfQuestions, scoreText) => {
-	const result = $('.result');
-	const review = $('.review-quiz');
 
 	if (confirm('Are you want to finish this quit?')) {
 		review.classList.add('active');
@@ -183,5 +183,10 @@ const showScore = (score, numOfQuestions, scoreText) => {
 // Try again
 const tryAgainBtn = $('.result-btn');
 tryAgainBtn.addEventListener('click', () => {
-	window.location.reload();
+	quiz.classList.remove('active');
+	review.classList.remove('active');
+	submitBtn.classList.remove('active');
+	description.classList.remove('hide');
+
+	window.scrollTo({ top: 0 });
 })

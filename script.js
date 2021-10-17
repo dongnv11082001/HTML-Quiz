@@ -21,7 +21,7 @@ const startQuiz = () => {
 
 	quiz.classList.add('active');
 	submitBtn.classList.add('active');
-	description.classList.add('hide');
+	description.classList.remove('active');
 }
 const startBtn = $('.start-btn');
 startBtn.addEventListener('click', startQuiz);
@@ -75,19 +75,19 @@ const selectedAnswer = e => {
 	const answerElement = inputElement.parentElement;
 	const answerBlock = answerElement.parentElement;
 	const selectedAnswer = answerBlock.querySelector('.selected');
-	const checkedInput = answerBlock.querySelector('.selected input');
-	const answerId = inputElement.id.slice(1);
-	const userSelectedAnswerIndex = inputElement.value;
-	answers[answerId] = parseInt(userSelectedAnswerIndex);
-
+	const checkedInput = answerBlock.querySelector('.selected input');	
 	if (inputElement.checked === true) {
 		answerElement.classList.add('selected');
 	}
-
+	
 	if (checkedInput !== null) {
 		checkedInput.checked = false;
 		selectedAnswer.classList.remove('selected');
 	}
+	// get user selected answer index
+	const answerId = inputElement.id.slice(1);
+	const userSelectedAnswerIndex = inputElement.value;
+	answers[answerId] = parseInt(userSelectedAnswerIndex);
 }
 
 // Submit quiz
@@ -117,6 +117,7 @@ const submitQuiz = () => {
 }
 submitBtn.addEventListener('click', submitQuiz);
 
+// Show correct answers
 const handleCorrectAnswers = (correctAnswers) => {
 	const answers = $$('.answer.selected');
 	answers.forEach(answer => {
@@ -165,7 +166,6 @@ const handleCorrectAnswers = (correctAnswers) => {
 
 // Show quiz score
 const showScore = (score, numOfQuestions, scoreText) => {
-
 	if (confirm('Are you want to finish this quit?')) {
 		review.classList.add('active');
 		result.classList.add('active');
@@ -174,7 +174,6 @@ const showScore = (score, numOfQuestions, scoreText) => {
 	}
 
 	submitBtn.classList.remove('active');
-	window.scrollTo({ top: 0 });
 	$('#score').innerText = `${score}/${numOfQuestions}`;
 	$('#percentage').innerText = `${(score / numOfQuestions) * 100}%`;
 	$('#scoreText').innerText = `${scoreText}`;
@@ -186,7 +185,6 @@ tryAgainBtn.addEventListener('click', () => {
 	quiz.classList.remove('active');
 	review.classList.remove('active');
 	submitBtn.classList.remove('active');
-	description.classList.remove('hide');
-
-	window.scrollTo({ top: 0 });
+	description.classList.add('active');
+	document.body.scrollIntoView();
 })

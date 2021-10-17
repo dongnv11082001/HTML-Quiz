@@ -161,13 +161,14 @@ label {
 .result,
 .submit,
 .review-quiz,
-.description.hide  {
+.description  {
     display: none;
 }
 
 .quiz.active,
 .submit.active,
-.review-quiz.active {
+.review-quiz.active,
+.description.active {
     display: block;
 }
 

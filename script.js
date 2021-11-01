@@ -6,18 +6,15 @@ const result = $('.result');
 const review = $('.review-quiz');
 const description = $('.description');
 let answers = {},
-attemptsID = '';
+	attemptsID = '';
 
 // Start Quiz
-const startQuiz = () => {
-	fetch(url, { method: 'POST', })
-		.then(response => response.json())
-		.then(data => {
-			const questionArray = data.questions;
-			attemptsID = data._id;
-			renderQuiz(questionArray);
-		})
-		.catch((err) => console.log('Error: ' + err))
+const startQuiz = async () => {
+	const response = await fetch(url, { method: 'POST' })
+	const data = await response.json()
+	const questionArray = data.questions;
+	attemptsID = data._id;
+	renderQuiz(questionArray);
 
 	quiz.classList.add('active');
 	submitBtn.classList.add('active');
@@ -75,11 +72,11 @@ const selectedAnswer = e => {
 	const answerElement = inputElement.parentElement;
 	const answerBlock = answerElement.parentElement;
 	const selectedAnswer = answerBlock.querySelector('.selected');
-	const checkedInput = answerBlock.querySelector('.selected input');	
+	const checkedInput = answerBlock.querySelector('.selected input');
 	if (inputElement.checked === true) {
 		answerElement.classList.add('selected');
 	}
-	
+
 	if (checkedInput !== null) {
 		checkedInput.checked = false;
 		selectedAnswer.classList.remove('selected');
@@ -92,28 +89,24 @@ const selectedAnswer = e => {
 
 // Submit quiz
 const submitBtn = $('.submit');
-const submitQuiz = () => {
-	const data = {
-		answers: answers
-	};
-
-	fetch(url + '/' + attemptsID + '/submit', {
+const submitQuiz = async () => {
+	const response = await fetch(url + '/' + attemptsID + '/submit', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify(data)
+		body: JSON.stringify({ answers })
 	})
-		.then(response => response.json())
-		.then(data => {
-			const correctAnswers = data.correctAnswers;
-			const score = data.score;
-			const scoreText = data.scoreText;
-			const numOfQuestions = data.questions.length;
 
-			showScore(score, numOfQuestions, scoreText);
-			handleCorrectAnswers(correctAnswers);
-		})
+	const data = await response.json()
+	const correctAnswers = data.correctAnswers;
+	const score = data.score;
+	const scoreText = data.scoreText;
+	const numOfQuestions = data.questions.length;
+
+	showScore(score, numOfQuestions, scoreText);
+	handleCorrectAnswers(correctAnswers);
+
 }
 submitBtn.addEventListener('click', submitQuiz);
 

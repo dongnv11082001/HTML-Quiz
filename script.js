@@ -13,8 +13,8 @@ const startQuiz = async () => {
 	const response = await fetch(url, { method: 'POST' })
 	const data = await response.json()
 	const questions = data.questions
-    console.log(questions);
 	attemptsID = data._id
+    
 	renderQuiz(questions)
 
 	quiz.classList.add('active')
@@ -103,7 +103,6 @@ const submitQuiz = async () => {
 
 	showScore(score, numOfQuestions, scoreText)
 	handleCorrectAnswers(correctAnswers)
-
 }
 submitBtn.addEventListener('click', submitQuiz)
 
@@ -176,4 +175,5 @@ tryAgainBtn.addEventListener('click', () => {
 	submitBtn.classList.remove('active')
 	description.classList.add('active')
 	document.body.scrollIntoView()
+    window.location.reload()
 })
